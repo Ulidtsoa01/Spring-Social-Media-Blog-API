@@ -10,10 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Service;
 
 import com.example.repository.AccountRepository;
 import com.example.entity.Account;
+import com.example.exception.ConflictException;
 
+@Service
 public class AccountService {
   AccountRepository acctRepo;
 
@@ -22,12 +25,12 @@ public class AccountService {
     this.acctRepo = acctRepo;
   }
 
-  public Account registerUser(Account acct) throws Exception {
+  public Account registerUser(Account acct) throws ConflictException {
     if (acct.getUsername() == null | acct.getUsername().isEmpty() | acct.getPassword().length() < 4) {
       return null;
     }
     if (acctRepo.findByUsername(acct.getUsername()) != null) {
-      throw new Exception("dd");
+      throw new ConflictException();
     }
     return acctRepo.save(acct);
   }
