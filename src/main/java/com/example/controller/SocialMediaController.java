@@ -43,11 +43,15 @@ public class SocialMediaController {
 
   @PostMapping(value = "/register")
   public ResponseEntity<Account> register(@RequestBody Account acct) throws ConflictException {
-    Account temp = accountService.registerUser(acct);
-    if (temp != null) {
-      return ResponseEntity.ok().body(temp);
+    try {
+      Account temp = accountService.registerUser(acct);
+      if (temp != null) {
+        return ResponseEntity.ok().body(temp);
+      }
+      return ResponseEntity.status(400).build();
+    } catch (ConflictException e) {
+      return ResponseEntity.status(409).build();
     }
-    return ResponseEntity.status(400).build();
   }
 
   @PostMapping(value = "/login")
@@ -66,7 +70,7 @@ public class SocialMediaController {
     if (temp != null) {
       return ResponseEntity.ok().body(temp);
     } else {
-      return ResponseEntity.status(400).body(null);
+      return ResponseEntity.status(400).build();
     }
   }
 
@@ -86,8 +90,8 @@ public class SocialMediaController {
   }
 
   @DeleteMapping(value = "/messages/{message_id}")
-  public ResponseEntity<Message> deleteMessage(@PathVariable int message_id) {
-    Message temp = messageService.deleteMessage(message_id);
+  public ResponseEntity<Integer> deleteMessage(@PathVariable int message_id) {
+    Integer temp = messageService.deleteMessage(message_id);
     if (temp != null) {
       return ResponseEntity.ok().body(temp);
     }

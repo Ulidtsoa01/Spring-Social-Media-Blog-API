@@ -26,7 +26,7 @@ public class MessageService {
     if (msg_txt == null || msg_txt.isEmpty() || msg_txt.length() >= 255) {
       return null;
     }
-    if (!acctRepo.findById(msg.getPostedBy()).isPresent()) {
+    if (acctRepo.findById(msg.getPostedBy()).isPresent()) {
       return msgRepo.save(msg);
     }
     return null;
@@ -40,11 +40,11 @@ public class MessageService {
     return msgRepo.findById(id).orElse(null);
   }
 
-  public Message deleteMessage(int id) {
+  public Integer deleteMessage(int id) {
     Optional<Message> msg = msgRepo.findById(id);
     if (msg.isPresent()) {
       msgRepo.deleteById(id);
-      return msg.get();
+      return 1;
     }
     return null;
   }
@@ -53,10 +53,13 @@ public class MessageService {
     if (msg_txt == null || msg_txt.isEmpty() || msg_txt.length() >= 255) {
       return null;
     }
-    Message msg = msgRepo.findById(id).get();
-    Integer rows_updated = msgRepo.updateMessageText(id, msg_txt);
-    msgRepo.save(msg);
-    return rows_updated;
+    Optional<Message> msg = msgRepo.findById(id);
+    if (msg.isPresent()) {
+      msg.get().setMessageText(msg_txt);
+      msgRepo.save(msg.get());
+      return 1;
+    }
+    return null;
   }
 
   public List<Message> getAllMessagesByAccountId(int id) {
