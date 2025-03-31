@@ -1,4 +1,4 @@
-# Spring Social media blog API
+# Spring Social Media Blog API
 
 ## Background 
 
