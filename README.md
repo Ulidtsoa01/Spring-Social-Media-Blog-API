@@ -2,7 +2,7 @@
 
 ## Background 
 
-This project is a backend for a hypothetical social media app that serves to manage user accounts and messages. It utilizes the Spring framework to perform dependency injections and create beans for the Account, Message, and other related classes. The app employs Spring Data and Spring MVC to achieve data persistence, build endpoints, and support CRUD operations. The API handles logins and registrations for users as well as message creations, message updates, and message deletions.
+This project is a backend for a hypothetical social media app that serves to manage user accounts and and the messages they post. It utilizes the Spring framework to perform dependency injections and create beans for the Account, Message, and other related classes. The app employs Spring Data and Spring MVC to achieve data persistence, build endpoints, and support CRUD operations. The API handles logins and registrations for users as well as message creations, message updates, and message deletions.
 
 ## Database Tables 
 
