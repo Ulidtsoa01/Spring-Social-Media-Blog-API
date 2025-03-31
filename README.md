@@ -2,11 +2,7 @@
 
 ## Background 
 
-Full-stack applications are typically concerned with both a front end, that displays information to the user and takes in input, and a backend, that manages persisted information.
-
-This project will be a backend for a hypothetical social media app, where we must manage our users’ accounts as well as any messages that they submit to the application. However, the functionality for this project will leverage a popular web application framework for Java known as Spring. The Spring framework allows for automatic injection and configuration of many features, including data persitence, endpoints and conventional data manipulation logic (CRUD operations).
-
-In our hypothetical micro-blogging or messaging app, any user should be able to see all of the messages posted to the site, or they can see the messages posted by a particular user. In either case, we require a backend which is able to deliver the data needed to display this information as well as process actions like logins, registrations, message creations, message updates, and message deletions.
+This project is a backend for a hypothetical social media app that serves to manage user accounts and messages. It utilizes the Spring framework to perform dependency injections and create beans for the Account, Message, and other related classes. The app employs Spring Data and Spring MVC to achieve data persistence, build endpoints, and support CRUD operations. The API handles logins and registrations for users as well as message creations, message updates, and message deletions.
 
 ## Database Tables 
 
@@ -27,20 +23,6 @@ messageText varchar(255),
 timePostedEpoch long,
 foreign key (postedBy) references Account(accountId)
 ```
-
-# Spring Technical Requirement
-
-## Project must leverage the Spring Boot Framework
-
-Java classes have been provided, but your entire project MUST leverage the Spring framework.
-In addition to functional test cases, "SpringTest" will verify that you have leveraged the Spring framework, Spring Boot, Spring MVC, and Spring Data.
-SpringTest will verify the following
-
- - That you have, by any means, have a bean for the AccountService, MessageService, AccountRepository, MessageRepository, and SocialMediaController classes
- - That AccountRepository and MessageRepository are working JPARepositories based on their corresponding Account and Message entities
- - That your Spring Boot app leverages MVC by checking for Spring's default error message structure.
- 
-The app will already be a Spring Boot app with a valid application.properties and valid database entities at the start.
 
 # User Stories
 
